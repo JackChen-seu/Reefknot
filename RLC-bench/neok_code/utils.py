@@ -10,7 +10,7 @@ import json
 
 def get_path(image_id):
     Image_path1 = '/home/ubuntu/hallu_team/junkai/Dataset/VisualGenome/'
-    Image_path2 = '/data2/zkn/neok_code/Datasets/visual_genome/VG_100K_2/'
+    Image_path2 = '/home/ubuntu/hallu_team/junkai/Dataset/COCO/val2014/'
     # if image is not None:
     image_id = str(image_id)
     if image_id.endswith('.jpg'):
@@ -87,15 +87,15 @@ def calculate_yes_no_accuracy(file_path):
             if response==label:
                 correct_count += 1
 
-    # 计算准确率
-    if total_count > 0:
-        accuracy = correct_count / total_count
-        print(f"Total entries: {total_count}")
-        print(f"Correct responses: {correct_count}")
-        print(f"Accuracy: {accuracy:.2f}")
-        print(f"Yes rate:{yes_rate/total_count:.2f}")
-    else:
-        print("No entries to process.")
+    
+    accuracy = correct_count / total_count
+    print(f"Total num is : {total_count}")
+    print(f"Correct responses: {correct_count}")
+    print(f"Accuracy: {accuracy:.4f}")
+    hal_rate=1-accuracy
+    print(f"Hallucination rate is :{hal_rate:.4f}")
+    print(f"Yes rate:{yes_rate/total_count:.2f}")
+   
 def calculate_pairwise_accuracy(file_path):
     
     correct_count = 0
@@ -147,12 +147,7 @@ def calculate_pairwise_accuracy(file_path):
 
 if __name__=='__main__':
     # calculate_multichoice_accuracy('/data2/zkn/neok_code/MiniGPT-4/TestResult/minigpt_Cognition_multichoice_result.jsonl')
-    calculate_pairwise_accuracy('/data2/zkn/neok_code/MiniGPT-4/TestResult/Perception_yes+no_qwen.jsonl')
-# def read_jsonl(file_path):
-#     a=[]
-#     with open(file_path, 'r') as file:
-        
-#         for line in file:
-#             json_obj = json.loads(line)
-#             a.append(json_obj)
-#     return a
+    # calculate_pairwise_accuracy('/data2/zkn/neok_code/MiniGPT-4/TestResult/Perception_yes+no_qwen.jsonl')
+    
+    calculate_yes_no_accuracy(file_path='/home/ubuntu/hallu_team/RLC-bench/Dataset/answer/qwen_Multichoice_POPE.jsonl')
+    calculate_yes_no_accuracy(file_path='/home/ubuntu/hallu_team/kening/kening_results/qwen_Multichoice_RLC.jsonl')

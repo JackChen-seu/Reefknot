@@ -39,7 +39,7 @@ if __name__ == '__main__':
     parser.add_argument('--tempeature', type=float, default=0 )
     parser.add_argument("--question-file", type=str, default="/data2/zkn/neok_code/Datasets/benchmark-3-percetion/benchmark-3-YesandNo.jsonl") 
     parser.add_argument("--answers-file", type=str, default="TestResult/Perception_yes+no_qwen.jsonl")
-    parser.add_argument("--category", type=str, default='yesno+')
+    parser.add_argument("--category", type=str, default='yesno')
     parser.add_argument("--device", type=str, default="cuda:2")
     args = parser.parse_args()
     
@@ -69,9 +69,9 @@ if __name__ == '__main__':
         answer = item["label"]
         category = args.category
         prompt= question
-        print('prompt:',prompt)
+        # print('prompt:',prompt)
         response, _ = inference(model, template, prompt, images=image,temperature=args.tempeature)
-        print('response:',response)
+        # print('response:',response)
         answer_data_json = {
             'image_id': image_id,
             'query_prompt': question,
