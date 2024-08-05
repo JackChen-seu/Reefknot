@@ -9,7 +9,7 @@ import json
 
 
 def get_path(image_id):
-    Image_path1 = '/home/ubuntu/hallu_team/junkai/Dataset/VisualGenome/'
+    Image_path1 = '/home/ubuntu/junkai/VisualGenome/'
     Image_path2 = '/home/ubuntu/hallu_team/junkai/Dataset/COCO/val2014/'
     # if image is not None:
     image_id = str(image_id)
@@ -23,9 +23,7 @@ def get_path(image_id):
     else:
         print('Cannot find image {}.jpg'.format(image_id))
         return None
-    
-    
-        category = 'Yes/No'
+
 
 def read_jsonl(file):
     with open(file, 'r') as f:

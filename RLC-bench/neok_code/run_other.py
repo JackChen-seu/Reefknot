@@ -9,6 +9,8 @@ import datetime
 import random
 import re
 import torch
+import sys
+sys.path.append('/home/ubuntu/kening/kening/RLC-bench/RLC-bench/neok_code')
 from utils import get_path,save_jsonl,read_jsonl,calculate_multichoice_accuracy
 from datasets import load_dataset
 import argparse
@@ -60,28 +62,21 @@ if __name__ == '__main__':
     data=read_jsonl(args.question_file)
 
     answer_all=[]
-    for idx, item in enumerate(tqdm(data, desc="Processing items")):
-        # index = item["question_id"]
-        question = item["query_prompt"]
+    for idx, item in enumerate(tqdm(data, desc=f"Processing {args.category} items")):
         image_id = item["image_id"]
         image = get_path(image_id) 
-        # print('image:',image)
+        question = item["query_prompt"]
         answer = item["label"]
         category = args.category
         prompt= question
         # print('prompt:',prompt)
         response, _ = inference(model, template, prompt, images=image,temperature=args.tempeature)
         # print('response:',response)
-        answer_data_json = {
-            'image_id': image_id,
-            'query_prompt': question,
-            'response': response,
-            'label' : answer,
-            'category' : category ,
-            'mllm_name': args.model_type
-        }
+        item['response']=response
+        item['mllm_name']= args.model_type
 
-        answer_all.append(answer_data_json)
+
+        answer_all.append(item)
     save_jsonl(answer_all, args.answers_file)
     answers_file = args.answers_file    
     if args.category == 'multichoice':
