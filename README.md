@@ -8,23 +8,29 @@ Our comprehensive evaluation across three distinct tasks revealed a substantial 
 
 ## Contents
 * [Dataset](#dataset)
-* [Usage](#usage)
+* [Mitigation](#mitigation)
 * [Modules](#modules)
 * [Add a New Task](#add-a-new-task)
 * [Citation](#citation)
 
 ## Dataset
-1. Contruction Method
+### Contruction Method
 
 We first identify relation triplets from Visual Genome (VG) dataset (Phase a), and conduct triplet filtering (Phase b). Subsequently, we extract the semantic triplets (Phase c) and categorize their relations (Phase d). Then, a relation-based question set can be constructed into three types (Phase e). Finally, the quality of dataset is ensured by three rounds of expert-based validation (Phase f).
 ![](img/data_pipeline.png)
 
-2. Download
+### Download
 
-You need to download the photo from [Visual Genome Dataset](https://homes.cs.washington.edu/~ranjay/visualgenome/api.html) first and merge two image folder to one.
+1. You need to download the photo from [Visual Genome Dataset](https://homes.cs.washington.edu/~ranjay/visualgenome/api.html) first and merge two image folder to one.
 
-Our dataset consists of three jsonl files: YESNO.jsonl, Multichoice.jsonl, VQA.jsonl. Each case in jsonl file includes the following parts:
+2. Our dataset consists of three jsonl files: YESNO.jsonl, Multichoice.jsonl, VQA.jsonl. Each case in jsonl file includes the following parts:
 - `image_id`: Image ID in Visual Genome Dataset
 - `query_prompt`: Quetion
 - `label`: Ground Truth label
 - `relation_type`: Type of relation, including perception and cognition.
+
+## Mitigation
+
+### Model Setup
+
+## Checkpoint Setup
