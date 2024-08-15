@@ -9,7 +9,7 @@ Our comprehensive evaluation across three distinct tasks revealed a substantial 
 ## Contents
 * [Dataset](#dataset)
 * [Mitigation](#mitigation)
-* [Modules](#modules)
+* [Usage](#usage)
 * [Add a New Task](#add-a-new-task)
 * [Citation](#citation)
 
@@ -40,6 +40,8 @@ conda activate Reefknot
 
 ## Mitigation
 
+![](img/method_case.png)
+
 ### Model Setup
 
 We use the code of mitigation on LLaVA as example.
@@ -50,4 +52,29 @@ We use the code of mitigation on LLaVA as example.
 git clone https://github.com/haotian-liu/LLaVA.git
 cd LLaVA
 ```
-2. Download checkpoint of LLaVA and Vision Encoder from [LLaVA](https://huggingface.co/liuhaotian/llava-v1.5-13b) [Vision Encoder](https://huggingface.co/openai/clip-vit-large-patch14-336)
+2. Download checkpoint of LLaVA and Vision Encoder from [LLaVA](https://huggingface.co/liuhaotian/llava-v1.5-13b) and [Vision Encoder](https://huggingface.co/openai/clip-vit-large-patch14-336)
+
+### Mitigation Setup
+
+Move `infer_LLaVA_yesandno.py` and `DTC.py` to `./llava/eval`
+
+## Usage
+
+Run `infer.sh`, which contains the following codes:
+
+```shell
+export CUDA_VISIBLE_DEVICES=0
+python ./infer_LLaVA_yesandno.py \
+    --model-path PATH_TO_LLaVA_CHECKPOINT \
+    --question-file PATH_TO_QUESTION_FILE \
+    --image-folder PATH_TO_IMAGE_FOLDER \
+    --answers-file PATH_TO_ANSWER_FILE \
+    --temperature 0 \
+    --conv-mode vicuna_v1 \
+    --apha APHA \
+    --layer LAYER_NUM \ 
+    --threshold ENT_THREAHOLD \
+    --model_type llava-v1.5-13b
+```
+
+For hyperparameters, we use `apha=0.1`, `layer=38`, `threshold=0.9`
