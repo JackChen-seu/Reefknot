@@ -75,7 +75,7 @@ if __name__ == '__main__':
             response, _ = inference(model, template, prompt, temperature=args.tempeature)
         else :
             response, _ = inference(model, template, prompt, images=image,temperature=args.tempeature)
-        
+        print('response:',response)
         item['response']=response
         item['mllm_name']= args.model_type
         answer_all.append(item)

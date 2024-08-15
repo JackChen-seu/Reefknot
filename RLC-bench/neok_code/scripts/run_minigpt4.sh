@@ -1,8 +1,8 @@
 #!/bin/bash
 
-export CUDA_VISIBLE_DEVICES="5"
+export CUDA_VISIBLE_DEVICES="4"
 MODEL_TYPE="minigptv2"
-BASE_PATH="/home/ubuntu/kening/kening/RLC-bench/RLC-bench/Dataset/release_v0"
+BASE_PATH="/home/ubuntu/kening/kening/RLC-bench/RLC-bench/Dataset/release_v1"
 PYTHON_PATH='/home/ubuntu/kening/kening/MiniGPT-4/infer_minigptv2_vg.py'
 RESULTS_DIR="/home/ubuntu/kening/kening/kening_results/$MODEL_TYPE"
 CONFIG_DIR="/home/ubuntu/kening/kening/MiniGPT-4/eval_configs/minigptv2_eval.yaml"
@@ -49,12 +49,12 @@ ANSWERS_FILE3="$RESULTS_DIR/VQA_result.jsonl"
 #     --output_file $ANSWERS_FILE2 \
 #     --category 'multichoice' 
 
-python $PYTHON_PATH \
-    --cfg-path  $CONFIG_DIR \
-    --model_version $MODEL_TYPE \
-    --question_dir $QUESTION_FILE3 \
-    --output_file $ANSWERS_FILE3 \
-    --category 'vqa'     
+# python $PYTHON_PATH \
+#     --cfg-path  $CONFIG_DIR \
+#     --model_version $MODEL_TYPE \
+#     --question_dir $QUESTION_FILE3 \
+#     --output_file $ANSWERS_FILE3 \
+#     --category 'vqa'     
 
 
 
