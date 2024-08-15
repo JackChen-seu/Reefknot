@@ -23,7 +23,16 @@ We first identify relation triplets from Visual Genome (VG) dataset (Phase a), a
 
 1. You need to download the photo from [Visual Genome Dataset](https://homes.cs.washington.edu/~ranjay/visualgenome/api.html) first and merge two image folder to one.
 
-2. Our dataset consists of three jsonl files: YESNO.jsonl, Multichoice.jsonl, VQA.jsonl. Each case in jsonl file includes the following parts:
+2. You need to git clone our repository
+
+```shell
+git clone https://github.com/Lumos0917/RLC-bench.git
+cd Reefknot
+conda create -yn Reefknot python=3.9
+conda activate Reefknot
+```
+   
+3. Our dataset consists of three jsonl files: YESNO.jsonl, Multichoice.jsonl, VQA.jsonl. Each case in jsonl file includes the following parts:
 - `image_id`: Image ID in Visual Genome Dataset
 - `query_prompt`: Quetion
 - `label`: Ground Truth label
@@ -33,4 +42,12 @@ We first identify relation triplets from Visual Genome (VG) dataset (Phase a), a
 
 ### Model Setup
 
-## Checkpoint Setup
+We use the code of mitigation on LLaVA as example.
+
+1. Download LLaVA file.
+
+```shell
+git clone https://github.com/haotian-liu/LLaVA.git
+cd LLaVA
+```
+2. Download checkpoint of LLaVA and Vision Encoder from [LLaVA](https://huggingface.co/liuhaotian/llava-v1.5-13b) [Vision Encoder](https://huggingface.co/openai/clip-vit-large-patch14-336)
