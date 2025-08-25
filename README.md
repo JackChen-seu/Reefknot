@@ -78,3 +78,6 @@ python ./infer_LLaVA_yesandno.py \
 ```
 
 For hyperparameters, we use `apha=0.1`, `layer=38`, `threshold=0.9`
+
+
+## Add a New Task~
