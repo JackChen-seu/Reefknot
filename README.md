@@ -1,12 +1,15 @@
 # Reefknot: A Comprehensive Benchmark for Relation Hallucination Evaluation, Analysis and Mitigation in Multimodal Large Language Models
 
-This repository contains the source code for Reefknot, which is a Multimodal Benchmark for Relation Hallucination Evaluation proposed in our paper [ “Reefknot: A Comprehensive Benchmark For Relation Hallucination Evaluation And Mitigation in Multimodal Large Language Models”](https://openreview.net/forum?id=aRQi5gHpcF)
+> **Update:** This work has been **accepted to ACL 2025 (Finding)**.
 
-Hallucination issues persistently plagued current multimodal large language models (MLLMs). While existing research primarily focuses on object-level or attribute-level hallucinations, sidelining the more sophisticated relation hallucinations that necessitate advanced reasoning abilities from MLLMs. Besides, recent benchmarks regarding relation hallucinations lack in-depth evaluation and effective mitigation. To handle the aforementioned challenges, we introduce Reefknot, the first comprehensive benchmark specifically targeting relation hallucinations, consisting of over 20,000 samples derived from real-world scenarios. Specifically, we first provide a systematic definition of relation hallucinations, integrating perspectives from perceptive and cognitive domains. Moreover, we construct the relation-based corpus utilizing the representative scene graph dataset Visual Genome (VG).
+This repository contains the source code for **Reefknot**, a multimodal benchmark for relation hallucination evaluation proposed in our paper, [“Reefknot: A Comprehensive Benchmark For Relation Hallucination Evaluation And Mitigation in Multimodal Large Language Models”](https://openreview.net/forum?id=aRQi5gHpcF).
 
-Our comprehensive evaluation across three distinct tasks revealed a substantial shortcoming in the capabilities of current MLLMs to mitigate issues related to relation hallucinations. Finally, we advance a novel confidence-based mitigation strategy tailored to tackle the relation hallucinations problem.
+Hallucination issues have persistently plagued current multimodal large language models (MLLMs). Existing research primarily focuses on object-level or attribute-level hallucinations, while sidelining the more sophisticated **relation hallucinations** that require advanced reasoning abilities. Moreover, recent benchmarks addressing relation hallucinations often lack thorough evaluation and effective mitigation strategies. To address these challenges, we introduce **Reefknot**, the first comprehensive benchmark specifically targeting relation hallucinations, consisting of over 20,000 samples drawn from real-world scenarios. We provide a systematic definition of relation hallucinations by integrating perspectives from perceptual and cognitive domains, and construct a relation-based corpus using the representative scene graph dataset **Visual Genome (VG)**.
+
+Our comprehensive evaluation across three distinct tasks reveals substantial shortcomings in current MLLMs’ ability to mitigate relation hallucinations. Finally, we propose a novel **confidence-based mitigation** strategy tailored to this problem.
 
 ## Contents
+
 * [Dataset](#dataset)
 * [Mitigation](#mitigation)
 * [Usage](#usage)
@@ -14,29 +17,47 @@ Our comprehensive evaluation across three distinct tasks revealed a substantial 
 * [Citation](#citation)
 
 ## Dataset
-### Contruction Method
 
-We first identify relation triplets from Visual Genome (VG) dataset (Phase a), and conduct triplet filtering (Phase b). Subsequently, we extract the semantic triplets (Phase c) and categorize their relations (Phase d). Then, a relation-based question set can be constructed into three types (Phase e). Finally, the quality of dataset is ensured by three rounds of expert-based validation (Phase f).
+### Construction Method
+
+We first identify relation triplets from the Visual Genome (VG) dataset (Phase a) and conduct triplet filtering (Phase b). Subsequently, we extract semantic triplets (Phase c) and categorize their relations (Phase d). Then, we construct a relation-based question set with three types (Phase e). Finally, we ensure dataset quality through three rounds of expert-based validation (Phase f).
+
 ![](img/data_pipeline.png)
 
 ### Download
 
-1. You need to download the photo from [Visual Genome Dataset](https://homes.cs.washington.edu/~ranjay/visualgenome/api.html) first and merge two image folder to one.
+1. Download the images from the [Visual Genome Dataset](https://homes.cs.washington.edu/~ranjay/visualgenome/api.html).
+   Then extract the two archives **images1.zip** and **images2.zip** into the **same** directory. The resulting folder structure should look like:
 
-2. You need to git clone our repository
+   ```text
+   VG_dataset
+   ├── VG_100K
+   │   ├── 1.jpg
+   │   ├── 2.jpg
+   │   └── ...
+   └── VG_100K_2
+       ├── 100001.jpg
+       └── ...
+   ```
 
-```shell
-git clone https://github.com/Lumos0917/RLC-bench.git
-cd Reefknot
-conda create -yn Reefknot python=3.9
-conda activate Reefknot
-```
-   
-3. Our dataset consists of three jsonl files: YESNO.jsonl, Multichoice.jsonl, VQA.jsonl. Each case in jsonl file includes the following parts:
-- `image_id`: Image ID in Visual Genome Dataset
-- `query_prompt`: Quetion
-- `label`: Ground Truth label
-- `relation_type`: Type of relation, including perception and cognition.
+2. Clone this repository and set up the environment:
+
+   ```shell
+   git clone https://github.com/JackChen-seu/Reefknot.git
+   cd Reefknot
+   conda create -yn Reefknot python=3.9
+   conda activate Reefknot
+   cd LLaVA
+   pip install --upgrade pip
+   pip install -e .
+   ```
+
+3. Our dataset consists of three `.jsonl` files: `YESNO.jsonl`, `Multichoice.jsonl`, and `VQA.jsonl`. Each entry in a JSONL file includes:
+
+   * `image_id`: Image ID in the Visual Genome dataset
+   * `query_prompt`: Question
+   * `label`: Ground-truth label
+   * `relation_type`: Type of relation, including **perception** and **cognition**
 
 ## Mitigation
 
@@ -44,40 +65,48 @@ conda activate Reefknot
 
 ### Model Setup
 
-We use the code of mitigation on LLaVA as example.
+We provide LLaVA-based code as an example for running the mitigation.
 
-1. Download LLaVA file.
+1. Download the LLaVA checkpoint and the vision encoder from [LLaVA](https://huggingface.co/liuhaotian/llava-v1.5-13b) and [Vision Encoder](https://huggingface.co/openai/clip-vit-large-patch14-336).
 
-```shell
-git clone https://github.com/haotian-liu/LLaVA.git
-cd LLaVA
-```
-2. Download checkpoint of LLaVA and Vision Encoder from [LLaVA](https://huggingface.co/liuhaotian/llava-v1.5-13b) and [Vision Encoder](https://huggingface.co/openai/clip-vit-large-patch14-336)
-
-### Mitigation Setup
-
-Move `infer_LLaVA_yesandno.py` and `DTC.py` to `./llava/eval`
+2. In `/LLaVA/infer_LLaVA_yesandno.py`, **replace the file paths at lines 39 and 40** with the paths to your extracted `VG_100K` and `VG_100K_2` directories.
 
 ## Usage
 
-Run `infer.sh`, which contains the following codes:
+Run `infer.sh`, which contains the following command:
 
 ```shell
 export CUDA_VISIBLE_DEVICES=0
-python ./infer_LLaVA_yesandno.py \
+python LLaVA/infer_LLaVA_yesandno.py \
     --model-path PATH_TO_LLaVA_CHECKPOINT \
     --question-file PATH_TO_QUESTION_FILE \
-    --image-folder PATH_TO_IMAGE_FOLDER \
     --answers-file PATH_TO_ANSWER_FILE \
     --temperature 0 \
     --conv-mode vicuna_v1 \
     --apha APHA \
-    --layer LAYER_NUM \ 
-    --threshold ENT_THREAHOLD \
-    --model_type llava-v1.5-13b
+    --layer LAYER_NUM \
+    --threshold ENT_THREAHOLD
 ```
 
-For hyperparameters, we use `apha=0.1`, `layer=38`, `threshold=0.9`
+**Hyperparameters.** We use `apha=0.1`, `layer=38`, `threshold=0.9`.
+
+### Tips & Citation
+
+* We sincerely thank the open-source project [LLaVA](https://github.com/haotian-liu/LLaVA). For convenience in environment setup, we recommend installing by directly integrating LLaVA’s code as described above.
 
 
-## Add a New Task~
+* Additionally, from a technical point, this algorithm is primarily implemented by applying **monkey patches**; the core code is located at `'LLaVA/llava/eval/DTC.py'`. If you are interested in the hidden states of MLLMs/LLMs, you should read this file carefully (GPT can be a great assistant for reading code).
+
+If you find our work useful, please cite:
+
+```
+@misc{reefknot,
+      title={Reefknot: A Comprehensive Benchmark for Relation Hallucination Evaluation, Analysis and Mitigation in Multimodal Large Language Models}, 
+      author={Kening Zheng and Junkai Chen and Yibo Yan and Xin Zou and Xuming Hu},
+      year={2025},
+      eprint={2408.09429},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2408.09429}, 
+}
+```

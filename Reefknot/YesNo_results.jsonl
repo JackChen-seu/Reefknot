@@ -1,0 +1,10 @@
+{"image_id": "1592267", "query_prompt": "Is the bus driver on bus in this photo? Please answer yes or no.", "response": "Yes", "label": "yes", "mllm_name": "llava-v1.5-13b"}
+{"image_id": "1592267", "query_prompt": "Is the bus driver off the bus in this photo? Please answer yes or no.", "response": "", "label": "no", "mllm_name": "llava-v1.5-13b"}
+{"image_id": "2370275", "query_prompt": "Are the sandwich on plate in this photo? Please answer yes or no.", "response": "Yes", "label": "yes", "mllm_name": "llava-v1.5-13b"}
+{"image_id": "2370275", "query_prompt": "Is the sandwich under the plate in this photo? Please answer yes or no.", "response": "", "label": "no", "mllm_name": "llava-v1.5-13b"}
+{"image_id": "2340467", "query_prompt": "Is the banner on building in this photo? Please answer yes or no.", "response": "Yes", "label": "yes", "mllm_name": "llava-v1.5-13b"}
+{"image_id": "2340467", "query_prompt": "Is the banner next to the building in this photo? Please answer yes or no.", "response": "Yes", "label": "no", "mllm_name": "llava-v1.5-13b"}
+{"image_id": "2341974", "query_prompt": "Is the logo on hat in this photo? Please answer yes or no.", "response": "Yes", "label": "yes", "mllm_name": "llava-v1.5-13b"}
+{"image_id": "2341974", "query_prompt": "Is the logo under hat in this photo? Please answer yes or no.", "response": "Yes", "label": "no", "mllm_name": "llava-v1.5-13b"}
+{"image_id": "333", "query_prompt": "Is the coffee pot on coffee maker in this photo? Please answer yes or no.", "response": "Yes", "label": "yes", "mllm_name": "llava-v1.5-13b"}
+{"image_id": "333", "query_prompt": "Is the coffee pot next to the coffee maker in this photo? Please answer yes or no.", "response": "Yes", "label": "no", "mllm_name": "llava-v1.5-13b"}
