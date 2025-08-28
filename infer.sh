@@ -1,5 +1,5 @@
-export CUDA_VISIBLE_DEVICES=2
-python LLaVA/infer_LLaVA_yesandno.py \
+export CUDA_VISIBLE_DEVICES=3
+python infer_LLaVA_yesandno.py \
     --model-path /hpc2hdd/home/yuxuanzhao/lijungang/nk_code/LLM/liuhaotian/llava-v1.5-13b \
     --question-file Dataset/YESNO.jsonl \
     --answers-file Result/YesNo_results.jsonl \

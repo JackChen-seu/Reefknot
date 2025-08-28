@@ -71,6 +71,8 @@ We provide LLaVA-based code as an example for running the mitigation.
 
 2. In `/LLaVA/infer_LLaVA_yesandno.py`, **replace the file paths at lines 39 and 40** with the paths to your extracted `VG_100K` and `VG_100K_2` directories.
 
+3. Move DTC.py  to `/LLaVA/llava/`.
+
 ## Usage
 
 Run `infer.sh`, which contains the following command:
