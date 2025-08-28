@@ -99,7 +99,7 @@ python LLaVA/infer_LLaVA_yesandno.py \
 
 * Additionally, from a technical point, this algorithm is primarily implemented by applying **monkey patches**; the core code is located at `'LLaVA/llava/eval/DTC.py'`. If you are interested in the hidden states of MLLMs/LLMs, you should read this file carefully (GPT can be a great assistant for reading code).
 
-If you find our work useful, please cite:
+If you find our work useful, please cite:  
 
 ```
 @misc{reefknot,
